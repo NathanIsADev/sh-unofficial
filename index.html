@@ -1,0 +1,389 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Deutschland </title>
+  <meta name="description" content="Umfangreiche, responsive Ein-Seiten Webseite zu Deutschland (HTML+CSS).">
+  <style>
+    /* Reset & base */
+    :root{
+      --bg:#f7f7fb; --card:#ffffff; --muted:#55607a; --accent:#0b74ff; --accent-2:#06b6d4; --glass: rgba(255,255,255,0.6);
+      --radius:14px; --maxw:1100px; --shadow: 0 6px 24px rgba(15,23,42,0.08);
+      color-scheme: light;
+    }
+    .dark{ --bg:#0b1220; --card:#0f1724; --muted:#9aa6b2; --accent:#3b82f6; --accent-2:#0891b2; --glass: rgba(255,255,255,0.04); --shadow: 0 8px 30px rgba(2,6,23,0.6); color-scheme: dark; }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial; background:linear-gradient(180deg,var(--bg),#ffffff); color: #0b1220; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale}
+    .dark body{color: #e6eef9}
+
+    /* layout */
+    .wrap{max-width:var(--maxw);margin:28px auto;padding:28px}
+    header{display:flex;align-items:center;justify-content:space-between;gap:18px}
+    .brand{display:flex;gap:14px;align-items:center}
+    .flag{width:52px;height:36px;border-radius:10px;box-shadow:var(--shadow);display:flex;align-items:center;justify-content:center;background:linear-gradient(90deg,#000 0 33%,#dd0000 33% 66%,#ffcc00 66%)}
+    h1{font-size:20px;margin:0}
+    p.lead{margin:2px 0 0;color:var(--muted);font-size:13px}
+
+    nav{display:flex;gap:8px;align-items:center}
+    .btn{padding:9px 12px;border-radius:10px;background:var(--card);box-shadow:var(--shadow);border:1px solid rgba(0,0,0,0.04);cursor:pointer;font-weight:600;text-decoration:none;display:inline-flex;align-items:center;gap:8px}
+    .btn.ghost{background:transparent;border:1px solid rgba(0,0,0,0.06)}
+    .btn.primary{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:white;border:0}
+
+    /* hero */
+    .hero{display:grid;grid-template-columns:1fr 420px;gap:28px;align-items:center;margin-top:26px}
+    .card{background:var(--card);border-radius:var(--radius);padding:22px;box-shadow:var(--shadow)}
+    .facts{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:16px}
+    .fact{padding:10px;border-radius:10px;background:linear-gradient(180deg,var(--glass),transparent);font-size:13px}
+
+    /* map card */
+    .mapBox{height:320px;border-radius:12px;overflow:hidden;display:flex;align-items:center;justify-content:center;background:linear-gradient(180deg,#fde68a,#fee2b3)}
+    .maplabel{position:absolute;margin-top:12px;background:rgba(255,255,255,0.9);padding:6px 10px;border-radius:999px;font-size:12px;box-shadow:var(--shadow)}
+
+    /* grid sections */
+    .grid3{display:grid;grid-template-columns:2fr 1fr;gap:20px;margin-top:24px}
+    .cards{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+    .listGrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+
+    h2{margin:0 0 10px;font-size:18px}
+    h3{margin:0 0 8px;font-size:16px}
+    small{color:var(--muted)}
+
+    /* timeline */
+    .timeline{border-left:3px solid rgba(99,102,241,0.12);padding-left:14px}
+    .tl-item{margin-bottom:14px}
+    .tl-year{font-size:12px;color:var(--muted)}
+
+    /* cities */
+    .city{padding:12px;border-radius:12px;background:linear-gradient(180deg,var(--card),rgba(0,0,0,0.02))}
+
+    /* region cards */
+    .region{padding:12px;border-radius:12px;background:linear-gradient(180deg,var(--glass),transparent)}
+
+    /* FAQ */
+    details{background:linear-gradient(180deg,var(--card),transparent);padding:12px;border-radius:10px;border:1px solid rgba(0,0,0,0.04)}
+    summary{cursor:pointer;font-weight:600}
+
+    /* footer */
+    footer{margin-top:28px;text-align:center;color:var(--muted);font-size:13px}
+
+    /* responsive */
+    @media (max-width:980px){
+      .hero{grid-template-columns:1fr}
+      .facts{grid-template-columns:repeat(2,1fr)}
+      .grid3{grid-template-columns:1fr}
+    }
+
+    @media (max-width:560px){
+      .facts{grid-template-columns:repeat(2,1fr)}
+      .brand h1{font-size:16px}
+      nav{flex-wrap:wrap}
+    }
+
+    /* small utility */
+    .muted{color:var(--muted);font-size:13px}
+    a.link{color:var(--accent);text-decoration:none;font-weight:600}
+
+    /* Schleswig-Holstein Button (passt zum bestehenden btn-stil) */
+    .btn.sh {
+      padding:9px 12px;
+      border-radius:10px;
+      font-weight:700;
+      box-shadow:var(--shadow);
+      border:1px solid rgba(0,0,0,0.06);
+      text-decoration:none;
+      color:white;
+      background: linear-gradient(90deg, #004b87 0%, #0077c8 50%, #de2910 100%);
+      transition:transform .12s ease, box-shadow .12s ease, opacity .12s ease;
+      -webkit-font-smoothing:antialiased;
+    }
+
+    .btn.sh .sh-flag {
+      width:20px;
+      height:14px;
+      flex:0 0 20px;
+      border-radius:3px;
+      box-shadow: 0 2px 8px rgba(2,6,23,0.18);
+      display:inline-block;
+    }
+
+    .btn.sh:hover,
+    .btn.sh:focus {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(2,6,23,0.12);
+      outline: none;
+      opacity: 0.98;
+    }
+
+    @media (max-width:560px){
+      .btn.sh { padding:8px 10px; font-size:14px; gap:6px; }
+    }
+
+  </style>
+</head>
+<body>
+  <div class="wrap" id="page">
+    <header>
+      <div class="brand">
+        <div class="flag" aria-hidden="true"></div>
+        <div>
+          <h1>Deutschland — Uebersicht</h1>
+          <p class="lead">Uebersichtlich, informativ und kompakt.</p>
+        </div>
+      </div>
+
+      <nav>
+        <button class="btn" onclick="document.documentElement.classList.toggle('dark')">Toggle Dark</button>
+        <a href="#tourismus" class="btn ghost">Tourismus</a>
+
+        <!-- Schleswig-Holstein Button (extern, öffnet neues Fenster) -->
+        <a class="btn sh" href="https://dadethan.w3spaces.com/uselesstwo.html" target="_blank" rel="noopener noreferrer" aria-label="In-Offizielle Seite Schleswig-Holstein (öffnet neues Fenster)">
+          <!-- Inline-SVG: stilisierte Flagge (klein) -->
+          <svg class="sh-flag" viewBox="0 0 3 2" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true">
+            <rect width="3" height="0.66" y="0" fill="#004b87"/>
+            <rect width="3" height="0.66" y="0.66" fill="#ffffff"/>
+            <rect width="3" height="0.68" y="1.32" fill="#de2910"/>
+          </svg>
+
+          <span>Schleswig-Holstein</span>
+        </a>
+
+        <a href="#wissen" class="btn ghost">Wissen</a>
+        <a href="#kontakt" class="btn primary">Kontakt</a>
+      </nav>
+    </header>
+
+    <main>
+      <!-- HERO -->
+      <section class="hero">
+        <div>
+          <div class="card">
+            <h2>Willkommen in Deutschland</h2>
+            <p class="muted">Diese Seite bietet eine lange, detaillierte Uebersicht: Geschichte, Staedte, Regionen, Kultur, Essen, Wirtschaft und praktische Reisetipps.</p>
+
+            <div class="facts" aria-hidden="false">
+              <div class="fact"><small>Hauptstadt</small><div><strong>Berlin</strong></div></div>
+              <div class="fact"><small>Einwohner</small><div><strong>~83 Millionen (2024)</strong></div></div>
+              <div class="fact"><small>Flaeche</small><div><strong>357.022 km2</strong></div></div>
+              <div class="fact"><small>Amtssprache</small><div><strong>Deutsch</strong></div></div>
+              <div class="fact"><small>Waehrung</small><div><strong>Euro (EUR)</strong></div></div>
+              <div class="fact"><small>Staatsform</small><div><strong>Foederale Republik</strong></div></div>
+            </div>
+
+            <div style="margin-top:16px;display:flex;gap:8px">
+              <a class="btn primary" href="#tourismus">Reisetipps & Highlights</a>
+              <a class="btn" href="#wissen">Mehr Wissen</a>
+            </div>
+
+          </div>
+        </div>
+
+        <div style="position:relative">
+          <div class="card mapBox">
+            <svg viewBox="0 0 200 160" width="90%" height="90%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <defs>
+                <linearGradient id="lg" x1="0" x2="1"><stop offset="0%" stop-color="#f97316"/><stop offset="100%" stop-color="#10b981"/></linearGradient>
+              </defs>
+              <path d="M30 20 C55 10, 85 10, 110 25 C125 35, 140 30, 150 40 C160 54, 150 70, 140 80 C120 95, 110 105, 90 115 C70 125, 40 120, 30 100 C20 80, 25 40, 30 20 Z" fill="url(#lg)" stroke="#0b1220" stroke-width="0.6"/>
+            </svg>
+          </div>
+          <div class="maplabel">Stilisierte Silhouette</div>
+        </div>
+      </section>
+
+      <!-- Wissen & Schnellzugriff -->
+      <section id="wissen" class="grid3">
+        <article class="card">
+          <h3>Geschichte & Politik</h3>
+          <p class="muted">Von fruehen Stämmen ueber das Kaiserreich bis zur Wiedervereinigung: Deutschland ist heute ein föderaler, parlamentarischer Staat mit 16 Bundeslaendern.</p>
+
+          <div style="margin-top:14px">
+            <h4 class="muted">Zeitstrahl</h4>
+            <div class="timeline" style="margin-top:8px">
+              <div class="tl-item"><div class="tl-year">9. Jh.</div><div>Fruehmittelalter und Stammesherzogtuemer.</div></div>
+              <div class="tl-item"><div class="tl-year">1871</div><div>Gruendung des Deutschen Reichs (Kaiserreich).</div></div>
+              <div class="tl-item"><div class="tl-year">1918 - 1945</div><div>Weimarer Republik, NS-Zeit und zweiter Weltkrieg.</div></div>
+              <div class="tl-item"><div class="tl-year">1949</div><div>Teilung: BRD und DDR.</div></div>
+              <div class="tl-item"><div class="tl-year">1990</div><div>Wiedervereinigung am 3. Oktober 1990.</div></div>
+              <div class="tl-item"><div class="tl-year">Heute</div><div>Moderne Industrienation mit starker Forschung und Kultur.</div></div>
+            </div>
+          </div>
+
+          <div style="margin-top:16px" class="cards">
+            <div class="card" style="padding:12px">
+              <h4>Staatsaufbau</h4>
+              <p class="muted">Bundeskanzler*in leitet die Regierung, Bundespraesident*in hat repräsentative Aufgaben. Bildung ist Laendersache.</p>
+            </div>
+            <div class="card" style="padding:12px">
+              <h4>Internationale Rolle</h4>
+              <p class="muted">Mitglied in EU, NATO, G7; starke Exportnation und zentraler Akteur in Europa.</p>
+            </div>
+          </div>
+
+          <div style="margin-top:16px">
+            <h4>Wissenschaft & Technik</h4>
+            <div class="listGrid" style="margin-top:8px">
+              <div class="card"><strong>Fraunhofer / Max-Planck</strong><div class="muted">Angewandte Forschung und Grundlagenforschung.</div></div>
+              <div class="card"><strong>Industrie & Innovation</strong><div class="muted">Maschinenbau, Automobil, Chemie, Erneuerbare Energien, KI-Forschung.</div></div>
+            </div>
+          </div>
+
+        </article>
+
+        <aside class="card">
+          <h4>Schnellzugriff</h4>
+          <ul style="padding-left:18px;margin-top:8px;line-height:1.6;color:var(--muted)">
+            <li>Visum & Einreise-Infos</li>
+            <li>OePNV & Bahnverbindungen</li>
+            <li>Notruf: 112 (EU)/110 (Polizei)</li>
+            <li>Apotheken & Notaufnahme</li>
+          </ul>
+
+          <div style="margin-top:12px">
+            <h4>Top-Sehenswuerdigkeiten</h4>
+            <ol style="margin-top:6px;color:var(--muted);line-height:1.6">
+              <li>Brandenburger Tor (Berlin)</li>
+              <li>Schloss Neuschwanstein (Bayern)</li>
+              <li>Koelner Dom (Koeln)</li>
+              <li>Miniatur Wunderland (Hamburg)</li>
+              <li>Deutsche Alpenstrasse</li>
+            </ol>
+          </div>
+        </aside>
+      </section>
+
+      <!-- Cities -->
+      <section style="margin-top:22px">
+        <h3>Wichtige Staedte & Regionen</h3>
+        <div class="listGrid" style="margin-top:10px">
+          <div class="city card"><strong>Berlin</strong><div class="muted">Kulturelles und politisches Zentrum mit Museen und Startups.</div></div>
+          <div class="city card"><strong>Muenchen</strong><div class="muted">Technik, Tradition, Automobilindustrie und Alpennaehe.</div></div>
+          <div class="city card"><strong>Hamburg</strong><div class="muted">Groesster Hafen, maritime Kultur und Medien.</div></div>
+          <div class="city card"><strong>Koeln</strong><div class="muted">Beruehmt fuer den Dom und Karneval.</div></div>
+          <div class="city card"><strong>Frankfurt</strong><div class="muted">Finanzzentrum mit grossem Flughafen.</div></div>
+          <div class="city card"><strong>Stuttgart</strong><div class="muted">Automobile (Mercedes, Porsche) und Weinregion.</div></div>
+          <div class="city card"><strong>Dresden</strong><div class="muted">Barocke Architektur und Elbufer.</div></div>
+        </div>
+      </section>
+
+      <!-- Regions & Nature -->
+      <section style="margin-top:22px" class="card">
+        <h3>Regionen & Natur</h3>
+        <div class="listGrid" style="margin-top:8px">
+          <div class="region"><strong>Bayern</strong><div class="muted">Alpen, Seen und Traditionen.</div></div>
+          <div class="region"><strong>Norddeutschland</strong><div class="muted">Kueste, Inseln und Hafenstadt Hamburg.</div></div>
+          <div class="region"><strong>Rheinland</strong><div class="muted">Weinbau, Rhein und historische Staedte.</div></div>
+          <div class="region"><strong>Sachsen</strong><div class="muted">Kulturelle Zentren wie Dresden und Leipzig.</div></div>
+        </div>
+        <p class="muted" style="margin-top:12px">Nationalparks, Wanderwege in den Alpen und Kuestenabschnitte bieten vielfaeltige Outdoor-Moeglichkeiten.</p>
+      </section>
+
+      <!-- Culture & Food -->
+      <section style="margin-top:22px" class="grid3">
+        <article class="card">
+          <h3>Kultur & Traditionen</h3>
+          <p class="muted">Deutschlands Kultur reicht von klassischer Musik (Bach, Beethoven) bis zu moderner Pop- und Elektronikszene. Dialekte foerdern regionale Identitaet.</p>
+
+          <div style="margin-top:12px" class="listGrid">
+            <div class="card"><strong>Sprache & Dialekte</strong><div class="muted">Bayrisch, Saechsisch, Schwaebisch, Plattdeutsch und Standarddeutsch.</div></div>
+            <div class="card"><strong>Feste & Braeuche</strong><div class="muted">Oktoberfest, Karneval und Weihnachtsmaerkte sind regional wichtig.</div></div>
+          </div>
+        </article>
+
+        <aside class="card">
+          <h3>Essen & Trinken</h3>
+          <ul style="margin-top:8px;color:var(--muted);line-height:1.6">
+            <li><strong>Bratwurst</strong> – regionale Varianten, oft gegrillt.</li>
+            <li><strong>Sauerbraten</strong> – mariniertes Rind, klassisch mit Rotkohl.</li>
+            <li><strong>Schnitzel</strong> – panierter Kalbs- oder Schweinebraten.</li>
+            <li><strong>Brezel</strong> – Laugengebaeck, typisch in Sueddeutschland.</li>
+            <li><strong>Brotvielfalt</strong> – hunderte Brotsorten und reichhaltige Baeckerkultur.</li>
+          </ul>
+        </aside>
+      </section>
+
+      <!-- Economy & Education -->
+      <section style="margin-top:22px" class="card">
+        <h3>Wirtschaft, Bildung & Forschung</h3>
+        <p class="muted">Stark in Maschinenbau, Automobilindustrie, Chemie und einem wachsenden Start-up-Sektor. Das duale Ausbildungssystem kombiniert Praxis und Theorie und ist international anerkannt.</p>
+
+        <div style="margin-top:12px" class="listGrid">
+          <div class="card"><strong>Innovation</strong><div class="muted">Enge Kooperationen zwischen Universitaeten und Industrie.</div></div>
+          <div class="card"><strong>Bildung</strong><div class="muted">Universitaeten, Fachhochschulen und Berufsausbildung.</div></div>
+          <div class="card"><strong>Arbeitsmarkt</strong><div class="muted">Gute Sozialsysteme, regionale Unterschiede bei Jobs.</div></div>
+        </div>
+      </section>
+
+      <!-- Travel & Practical -->
+      <section id="tourismus" style="margin-top:22px" class="grid3">
+        <article class="card">
+          <h3>Reisetipps & Praktische Hinweise</h3>
+          <ul style="margin-top:8px;color:var(--muted);line-height:1.6">
+            <li>Packe wettergerecht: Alpen vs. Kueste haben sehr unterschiedliche Bedingungen.</li>
+            <li>Oeffnungszeiten: Viele Geschaefte sind sonntags geschlossen.</li>
+            <li>Notruf: 112 (Rettung/Feuer), 110 (Polizei).</li>
+            <li>Geld: Kartenzahlung in Staedten, Bargeld auf dem Land oft noetig.</li>
+          </ul>
+        </article>
+
+        <aside class="card">
+          <h3>Transport</h3>
+          <ul style="margin-top:8px;color:var(--muted);line-height:1.6">
+            <li><strong>Deutsche Bahn</strong> – ICE verbindet grosse Staedte; Regionalverkehr fuer Nahreisen.</li>
+            <li><strong>OePNV</strong> – Stadtbahnen, U-Bahnen, Busse sind oft sehr effizient.</li>
+            <li><strong>Auto</strong> – Autobahnen ohne generelles Tempolimit auf vielen Strecken; Umweltzonen in Staedten beachten.</li>
+          </ul>
+        </aside>
+      </section>
+
+      <!-- FAQ -->
+      <section style="margin-top:22px">
+        <h3>Haeufig gestellte Fragen</h3>
+        <div style="display:grid;gap:10px;margin-top:10px">
+          <details>
+            <summary>Brauche ich ein Visum fuer Deutschland?</summary>
+            <div class="muted" style="margin-top:6px">Das haengt von deiner Staatsangehoerigkeit ab. EU-Buerger brauchen keins; viele andere Laender koennen visumfrei reisen. Informiere dich bei der deutschen Auslandsvertretung.</div>
+          </details>
+
+          <details>
+            <summary>Welche Sprache wird gesprochen?</summary>
+            <div class="muted" style="margin-top:6px">Deutsch ist Amtssprache; in touristischen Regionen ist Englisch weit verbreitet.</div>
+          </details>
+
+          <details>
+            <summary>Wann sind Geschaefte geoefnet?</summary>
+            <div class="muted" style="margin-top:6px">In der Regel Mo-Fr ca. 09:00-18:00, Samstag kurzeroeffnet, Sonntag meist geschlossen (Ausnahmen: Bahnhofsviertel, Tankstellen, Tourismuszentren).</div>
+          </details>
+        </div>
+      </section>
+
+      <!-- Kontakt -->
+      <section id="kontakt" style="margin-top:22px" class="card">
+        <h3>Kontakt & Weiteres</h3>
+        <p class="muted">Willst du dinge aenderen oder hast Fragen? Kontaktiere mich hier!</p>
+
+        <form style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px">
+          <input style="padding:10px;border-radius:8px;border:1px solid rgba(0,0,0,0.06)" placeholder="Dein Name (optional)">
+          <input style="padding:10px;border-radius:8px;border:1px solid rgba(0,0,0,0.06)" placeholder="E-Mail (optional)">
+          <textarea style="grid-column:1 / -1;padding:10px;border-radius:8px;border:1px solid rgba(0,0,0,0.06)" rows="5" placeholder="Nachricht"></textarea>
+          <button type="button" class="btn primary" style="grid-column:1 / -1">Nachricht senden</button>
+        </form>
+      </section>
+
+      <footer>
+        <small>© <span id="year"></span> Deutschland - Informationsseite • Erstellt als Schulprojekt</small>
+      </footer>
+
+    </main>
+  </div>
+
+  <script>
+    // set year
+    document.getElementById('year').textContent = new Date().getFullYear();
+    // small accessibility: focus outline for keyboard users
+    document.addEventListener('keyup', e => { if(e.key === 'Tab') document.body.classList.add('show-focus'); });
+  </script>
+</body>
+</html>
